@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Swap Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
+</head>
+<body>
+    <header>
+        <nav id="main-nav">
+            <!-- Navigation links will be managed by JS -->
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Home Page (New) -->
+        <section id="home-page" class="page">
+            <div class="home-card">
+                <h1>Welcome to Skill Swap!</h1>
+                <p class="tagline">Unlock Your Potential, Share Your Talents.</p>
+                <p class="description">
+                    Skill Swap is a community platform where you can list the skills you have and easily find others who can teach you the skills you want to learn. Connect, collaborate, and grow together!
+                </p>
+                <div class="home-buttons">
+                    <button class="submit-btn" id="home-login-btn">Login</button>
+                    <button class="submit-btn" id="home-register-btn">Register</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Authentication Section (Login/Register) - Uses your form-card styling -->
+        <section id="auth-page" class="page">
+            <div class="auth-card">
+                <!-- Login View -->
+                <div id="login-view">
+                    <h2>Login to Skill Swap</h2>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-username">Username:</label>
+                            <input type="text" id="login-username" required placeholder="Your username">
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password:</label>
+                            <input type="password" id="login-password" required placeholder="Your password">
+                        </div>
+                        <button type="submit" class="submit-btn">Login</button>
+                        <p class="link-text">Don't have an account? <a href="#" id="show-register">Register here</a></p>
+                        <div id="login-message" class="message"></div>
+                    </form>
+                </div>
+
+                <!-- Register View (Now includes all fields from your original login.html) -->
+                <div id="register-view" style="display: none;">
+                    <h2>Create Your Skill Swap Profile</h2>
+                    <form id="register-profile-form"> <!-- Renamed ID to avoid conflict with login form -->
+                        <div class="form-group">
+                            <label for="register-username">Choose Username <span class="required">*</span></label>
+                            <input type="text" id="register-username" name="username" required placeholder="e.g., skillmaster">
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Choose Password <span class="required">*</span></label>
+                            <input type="password" id="register-password" name="password" required placeholder="e.g., strongpassword123">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-name">Your Name</label>
+                            <input type="text" id="register-name" name="name" placeholder="e.g., Jane Doe">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-email">Email</label>
+                            <input type="text" id="register-email" name="email" placeholder="e.g., user@gmail.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-location">Location</label>
+                            <input type="text" id="register-location" name="location" placeholder="e.g., Ahmedabad, India">
+                        </div>
+
+                        <div class="form-group profile-photo-upload">
+                            <label for="register-profilePhoto">Profile Photo</label>
+                            <input type="file" id="register-profilePhoto" name="profilePhoto" accept="image/*">
+                            <div class="photo-preview-container">
+                                <img id="register-photoPreview" src="placeholder.jpg" alt="Profile Photo Preview" class="photo-preview">
+                            </div>
+                            <small>Click to upload a photo (Note: Photo is not saved on server in this version)</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-skills">Skills You Have <span class="required">*</span></label>
+                            <textarea id="register-skills" name="skills" rows="4" required placeholder="List skills you can offer, e.g., Web Design, Python Programming, Spanish Conversation"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-availability">Availability</label>
+                            <input type="text" id="register-availability" name="availability" placeholder="e.g., Weekends, Evenings after 6 PM">\
+                        </div>
+
+                        <div class="form-group radio-group">
+                            <p>Profile Visibility:</p>
+                            <label>
+                                <input type="radio" name="registerProfileVisibility" value="public" checked> Public
+                            </label>
+                            <label>
+                                <input type="radio" name="registerProfileVisibility" value="private"> Private
+                            </label>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Register & Create Profile</button>
+                        <p class="link-text">Already have an account? <a href="#" id="show-login">Login here</a></p>
+                        <div id="register-message" class="message"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Page -->
+        <section id="dashboard-page" class="page">
+            <h2 id="dashboard-welcome">Welcome to your Dashboard!</h2>
+            <p style="text-align: center; margin-bottom: 40px; color: var(--text-color);">This is your main application area. Here you can list your skills, search for others, and find matches.</p>
+            
+            <div class="dashboard-sections">
+                <div class="section-card">
+                    <h3>Your Skills</h3>
+                    <p>Manage the skills you can offer and those you want to learn.</p>
+                    <button id="show-profile">Go to Profile</button>
+                </div>
+                
+                <div class="section-card">
+                    <h3>Find Skills</h3>
+                    <p>Browse skills offered by other users in the community.</p>
+                    <button id="show-browse-skills">Browse Skills</button>
+                </div>
+
+                <div class="section-card">
+                    <h3>Find Matches</h3>
+                    <p>Let our AI suggest skill swap partners for you.</p>
+                    <button id="show-matches">Get Matches</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Page (Now for editing profile details and skills after registration) -->
+        <section id="profile-page" class="page">
+            <div class="form-card">
+                <h2>Edit Your Skill Swap Profile</h2>
+                <form id="editProfileForm"> <!-- New ID for edit form -->
+                    <div class="form-group">
+                        <label for="edit-name">Your Name</label>
+                        <input type="text" id="edit-name" name="name" placeholder="e.g., Jane Doe">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-email">Email</label>
+                        <input type="text" id="edit-email" name="email" placeholder="e.g., user@gmail.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-location">Location</label>
+                        <input type="text" id="edit-location" name="location" placeholder="e.g., Ahmedabad, India">
+                    </div>
+
+                    <div class="form-group profile-photo-upload">
+                        <label for="edit-profilePhoto">Profile Photo</label>
+                        <input type="file" id="edit-profilePhoto" name="profilePhoto" accept="image/*">
+                        <div class="photo-preview-container">
+                            <img id="edit-photoPreview" src="placeholder.jpg" alt="Profile Photo Preview" class="photo-preview">
+                        </div>
+                        <small>Click to upload a photo (Note: Photo is not saved on server in this version)</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-availability">Availability</label>
+                        <input type="text" id="edit-availability" name="availability" placeholder="e.g., Weekends, Evenings after 6 PM">
+                    </div>
+
+                    <div class="form-group radio-group">
+                        <p>Profile Visibility:</p>
+                        <label>
+                            <input type="radio" name="editProfileVisibility" value="public" checked> Public
+                        </label>
+                        <label>
+                            <input type="radio" name="editProfileVisibility" value="private"> Private
+                        </label>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="save-profile-details">Save Profile Details</button>
+                    <div id="edit-profile-details-message" class="message"></div>
+                </form>
+
+                <hr style="margin: 40px 0; border-color: var(--border-color);">
+
+                <form id="editSkillsForm">
+                    <h3>Skills You Offer:</h3>
+                    <div class="tag-input-container">
+                        <div id="skills-offer-tags"></div>
+                        <input type="text" id="new-skill-offer" class="skill-input" placeholder="Add a skill you offer (e.g., Web Design, Python)">
+                        <button type="button" id="add-skill-offer">Add Skill</button>
+                    </div>
+
+                    <h3>Skills You Want:</h3>
+                    <div class="tag-input-container">
+                        <div id="skills-want-tags"></div>
+                        <input type="text" id="new-skill-want" class="skill-input" placeholder="Add a skill you want (e.g., React, Cooking)">
+                        <button type="button" id="add-skill-want">Add Skill</button>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="save-skills-button">Save My Skills</button>
+                    <div id="edit-skills-message" class="message"></div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Browse Skills Page -->
+        <section id="browse-skills-page" class="page">
+            <h2>Browse Skills Offered by Others</h2>
+            <p style="text-align: center; margin-bottom: 30px; color: var(--text-color);">Explore what other users are offering and what they are looking for.</p>
+            
+            <div id="browse-skills-list" class="user-list">
+                <!-- User cards will be dynamically loaded here -->
+                <div id="browse-loading" class="loading-spinner" style="display: none;"></div>
+                <p id="browse-loading-text" class="loading-text" style="display: none;">Loading users...</p>
+                <div id="browse-error" class="error-message" style="display: none;"></div>
+                <div id="browse-no-users" class="no-matches" style="display: none;">No other users found yet.</div>
+            </div>
+        </section>
+
+        <!-- Matches Page -->
+        <section id="matches-page" class="page">
+            <h2>Suggested Skill Swap Matches</h2>
+            <p style="text-align: center; margin-bottom: 30px; color: var(--text-color);">Based on your listed skills, here are potential partners recommended by our AI.</p>
+
+            <button id="find-matches-button" class="refresh-button">Find New Matches</button>
+
+            <div id="matches-loading" class="loading-spinner" style="display: none;"></div>
+            <p id="matches-loading-text" class="loading-text" style="display: none;">Thinking and finding the best matches for you...</p>
+            <div id="matches-error" class="error-message" style="display: none;"></div>
+            <div id="matches-no-matches" class="no-matches" style="display: none;">No matches found yet. Make sure you have skills listed in your profile!</div>
+
+            <div id="matches-list" class="matches-list">
+                <!-- Match cards will be dynamically loaded here -->
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script> <!-- Link to external JavaScript -->
+</body>
+</html>
